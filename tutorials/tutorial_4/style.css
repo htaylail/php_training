@@ -1,0 +1,11 @@
+body {
+  max-width: 700px;
+  margin: 0 auto ;
+
+}
+.form-input input{ 
+  padding: 8px 15px;
+} 
+.form-input{
+  margin-bottom: 20px;
+} 
