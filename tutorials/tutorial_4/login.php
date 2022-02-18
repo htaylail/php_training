@@ -3,8 +3,8 @@ session_start();
 const username = 'admin';
 const password = 'admin';
 
-if (isset($_POST['username']) && isset($_POST['password'])) //when form submitted
-{
+//when form submitted
+if (isset($_POST['username']) && isset($_POST['password'])) {
   if ($_POST['username'] === username && $_POST['password'] === password) {
     $_SESSION['username'] = $_POST['username']; //write login to server storage
     header('Location: index.php'); //redirect to main
@@ -38,8 +38,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) //when form submitte
     </div>
     <div class="form-input">
       <input type="submit" value="Login">
-      <a href="login.php">Register</a>
+      <a href="./">Cancle</a>
     </div>
   </form>
 </body>
+
 </html>

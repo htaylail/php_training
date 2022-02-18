@@ -1,9 +1,10 @@
-<?php 
-session_start(); 
+<?php
+session_start();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +12,10 @@ session_start();
   <title>Home Page</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <h4>Welcome from our page</h4>
   <p>Are you want to logout <a href="logout.php">Click here</a> to Logout.</p>
 </body>
-</html>
 
+</html>
