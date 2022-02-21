@@ -1,34 +1,3 @@
-<?php
-//to check image file is submit or not
-if (isset($_POST['submit'])) {
-    if (!empty($_FILES['image'] and $_POST['folder'])) {
-        $fileName = $_FILES['image']['name'];
-        $tmpFile = $_FILES['image']['tmp_name'];
-        //to check file extension
-        $allowedExt = array("jpg", "png", "jpeg", "gif");
-        // to break string into array
-        $splitFileName = explode('.', $fileName);
-        //to change string to lowercase
-        $imageExt = strtolower(end($splitFileName));
-        if (in_array($imageExt, $allowedExt)) {
-            $dir = $_POST['folder'];
-            // to check folser is already exist or not
-            if (!is_dir($dir)) {
-                echo "This folder name is not exist so create it now.";
-                $folder = mkdir($dir, "0777", false);
-                $tmpFile = $folder;
-                move_uploaded_file($tmpFile, "$folder/$fileName");
-            } else {
-                move_uploaded_file($tmpFile, "$dir/$fileName");
-            }
-        } else {
-            echo "Please check your file again! " . $imageExt;
-        }
-    }
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +10,7 @@ if (isset($_POST['submit'])) {
 
 <body>
     <h1>Image Upload</h1>
-    <form action="index.php" method="post" enctype="multipart/form-data">
+    <form action="file.php" method="post" enctype="multipart/form-data">
         <label for="image">UploadImage</label>
         <input type="file" name="image" value="image" require>
 
