@@ -34,7 +34,6 @@
                </div>
                <input class="btn" type="submit" name="inputText" value="Generate">
           </form>
-
      </div>
 
 </body>

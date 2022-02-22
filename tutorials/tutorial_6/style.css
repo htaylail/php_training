@@ -1,0 +1,13 @@
+.sec-upload{
+    padding: 50px;
+    margin: 50px 300px;
+    box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+    width: 300px;
+}
+.tittle {
+    background: gray;
+    padding: 5px 10px;
+}
+.form-control{
+    padding: 10px;
+}
