@@ -1,0 +1,14 @@
+// create table for users , utf8-utf8_general_ci
+CREATE TABLE `training_crud`.`users` (
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(100) NOT NULL,
+  `age` INT UNSIGNED NOT NULL,
+  `phone` INT NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `address` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT 'CURRENT_TIMESTAMP',
+  PRIMARY KEY (`user_id`),
+  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = armscii8;
