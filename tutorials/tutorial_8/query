@@ -1,4 +1,5 @@
 // create table for users , utf8-utf8_general_ci
+
 CREATE TABLE `training_crud`.`users` (
   `user_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
@@ -12,3 +13,13 @@ CREATE TABLE `training_crud`.`users` (
   UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC) VISIBLE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = armscii8;
+
+
+
+// create table resetpasswords
+
+CREATE TABLE `training_crud`.`resetpasswords` (
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `code` VARCHAR(100) NOT NULL,
+  `password` VARCHAR(100) NULL,
+  PRIMARY KEY (`user_id`));

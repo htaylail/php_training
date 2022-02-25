@@ -4,14 +4,18 @@ require 'config.php';
 if (!empty($_POST)) {
   $userId = $_POST['user_id'];
   $name = $_POST['name'];
+  $age = $_POST['age'];
   $phone = $_POST['phone'];
   $email = $_POST['email'];
   $address = $_POST['address'];
+  $password = $_POST['password'];
   $created_at = $_POST['created_at'];
-  $pdo_statement = $pdo->prepare("UPDATE users set name = '$name', phone = '$phone', email = '$email', address = '$address',
-       password = '$password',  created_at = '$created_at' WHERE user_id = '$userId'");
 
-  $result = $pdo_statement->execute();
+  $pdoStatement = $pdo->prepare("UPDATE users SET name ='" . $name . "', age = '" . $age . "', phone = '" . $phone . "', email ='" . $email . "',
+                  address = '" . $address . "', password = '" . $password . "',
+                   created_at = '" . $created_at . "' WHERE user_id = '" . $userId . "'");
+
+  $result = $pdoStatement->execute();
   if ($result) {
     echo "<script>
           alert('Record is updated');
@@ -20,12 +24,9 @@ if (!empty($_POST)) {
   }
 }
 
-$pdo_statement = $pdo->prepare("SELECT * FROM users WHERE user_id = " . $_GET['user_id']);
-$pdo_statement->execute();
-
-$result = $pdo_statement->fetchAll();
-
-
+$pdoStatement = $pdo->prepare("SELECT * FROM users WHERE user_id = " . $_GET['user_id']);
+$pdoStatement->execute();
+$result = $pdoStatement->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -52,8 +53,13 @@ $result = $pdo_statement->fetchAll();
         </div>
 
         <div class="form-group">
+          <label for="age">User Name</label>
+          <input type="number" name="age" value="<?php echo $result[0]['age'] ?>" require>
+        </div>
+
+        <div class="form-group">
           <label for="phone">Phone Number</label>
-          <input type="text" name="phone" value="<?php echo $result[0]['phone'] ?>" require>
+          <input type="tel" name="phone" value="<?php echo $result[0]['phone'] ?>" require>
         </div>
 
         <div class="form-group">
@@ -78,8 +84,6 @@ $result = $pdo_statement->fetchAll();
 
         <input type="submit" class="btn btn-primary" name="" value="Update">
         <a class="btn btn-warning" href="index.php">Back</a>
-
-
       </form>
     </div>
   </div>

@@ -3,7 +3,6 @@ $(document).ready(function(){
         url: "http://localhost/training/php_training/tutorials/tutorial_9/mydata.php",
         method: "GET",
         success: function(data) {
-            console.log(data);
             var name = [];
             var age = [];
 
@@ -33,7 +32,6 @@ $(document).ready(function(){
         });
         },
         error: function(data) {
-        console.log(data);
         }
     });
 });

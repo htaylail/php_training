@@ -4,7 +4,6 @@ require 'config.php';
 session_start();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,9 +18,9 @@ session_start();
 
 <body>
   <?php
-  $pdo_statement = $pdo->prepare("SELECT * FROM users ORDER BY user_id DESC");
-  $pdo_statement->execute();
-  $result = $pdo_statement->fetchAll();
+  $pdoStatement = $pdo->prepare("SELECT * FROM users ORDER BY user_id DESC");
+  $pdoStatement->execute();
+  $result = $pdoStatement->fetchAll();
   ?>
 
   <div class="wrapper">
@@ -32,28 +31,26 @@ session_start();
           <a class="btn btn-primary" href="addUser.php">Create New</a>
           <a class="btn btn-danger" href="logout.php">Logout</a>
         </div><br>
-
         <thead>
           <tr>
             <th>No.</th>
             <th>Name</th>
+            <th>Age</th>
             <th>Phone</th>
             <th>Email</th>
             <th>Address</th>
             <th>Password</th>
             <th>Created At</th>
-            <th> Operation</th>
-
+            <th>Operation</th>
           </tr>
         </thead>
         <tbody>
-          <?php
-          if ($result) {
-            foreach ($result as $value) {
-          ?>
+          <?php if ($result) : ?>
+            <?php foreach ($result as $value) : ?>
               <tr>
                 <td> <?php echo $value['user_id'] ?></td>
                 <td> <?php echo $value['name'] ?></td>
+                <td> <?php echo $value['age'] ?></td>
                 <td> <?php echo $value['phone'] ?></td>
                 <td> <?php echo $value['email'] ?></td>
                 <td> <?php echo $value['address'] ?></td>
@@ -65,8 +62,8 @@ session_start();
                 </td>
               </tr>
           <?php
-            }
-          }
+            endforeach;
+          endif;
           ?>
         </tbody>
       </table>
