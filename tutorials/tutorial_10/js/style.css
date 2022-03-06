@@ -1,0 +1,12 @@
+#chart-container {
+    width: 600px;
+    padding: 20px;
+    margin: 50px 150px;
+    height: auto;
+    background: #d5db9f;
+}
+.title {
+    background: gray;
+    text-align: center;
+    padding: 20px;
+}

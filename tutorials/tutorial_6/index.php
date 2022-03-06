@@ -12,7 +12,7 @@
 <body>
     <div class="sec-upload">
         <h1 class="tittle">Image Upload</h1>
-        <form action="file.php" method="post" enctype="multipart/form-data">
+        <form action="fileUpload.php" method="post" enctype="multipart/form-data">
             <div class="form-control">
                 <label for="image">Upload Image</label>
                 <input type="file" name="image" value="image" require>

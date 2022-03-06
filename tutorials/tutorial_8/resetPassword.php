@@ -18,12 +18,13 @@ if (!empty($_POST)) {
     $sql = "SELECT email,code FROM resetpasswords WHERE code = '"  . $code . "'";
     $emaiQuery = $pdo->prepare($sql);
     $result = $emaiQuery->execute();
-    $result = $emaiQuery->fetchAll();
+    $result = $emaiQuery->fetchAll();   
     $email = $result[0]['email'];
     $password = $_POST['newpassword'];
     $comfimPassword = $_POST['comfimPassword'];
 
     if ($password == $comfimPassword )  {
+
         $pdoStatement = $pdo->prepare("UPDATE users SET password = '" . $password . "' WHERE email = '" . $email . "'");
         $result = $pdoStatement->execute();
     
@@ -31,15 +32,16 @@ if (!empty($_POST)) {
             $pdoStatement = $pdo->prepare("DELETE FROM resetpasswords WHERE code = '"  . $code . "'");
             $result = $pdoStatement->execute();
             echo "<script> alert('Record is updated');
-                    window.location.href = 'index.php'; </script>";
+                    window.location.href = 'login.php'; </script>";
         } else  {
             exit ("Something");
         }
     } else {
-        echo " Your password and comfirmPassword are not same ! Check again!";
+        echo "<div class='msg-reply'> <p> Your password and comfirmPassword are not same ! Check again!</p></div>";
     }
   }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,16 +57,18 @@ if (!empty($_POST)) {
 <body>
     <div class="wrapper">
         <div class="form-control">
-            <h1>Change Password</h1>
+            <h1>Login</h1>
             <form class="" action="" method="post">
                 <div class="form-group">
                     <label for="newpassword">New Password</label>
                     <input type="password" name="newpassword" value="" require>
                 </div>
+
                 <div class="form-group">
                     <label for="comfimPassword">Comfirm Password</label>
                     <input type="password" name="comfimPassword" value="" require>
                 </div>
+
                 <input type="submit" class="btn btn-primary" name="" value="Change Password">
             </form>
         </div>

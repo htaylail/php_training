@@ -2,6 +2,7 @@
 
 require 'config.php';
 session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +55,7 @@ session_start();
                 <td> <?php echo $value['phone'] ?></td>
                 <td> <?php echo $value['email'] ?></td>
                 <td> <?php echo $value['address'] ?></td>
-                <td> </td>
+                <td><?php echo "******";?></td>
                 <td> <?php echo date('d-m-Y', strtotime($value['created_at'])) ?></td>
                 <td>
                   <a OnClick="return confirm('Are you Sure want to edit user');" href="editUser.php?user_id=<?php echo $value['user_id'] ?>">Edit</a>
