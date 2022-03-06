@@ -29,6 +29,7 @@ if(isset($_POST['email'])) {
    
     $mail = new PHPMailer(true);
     try {
+<<<<<<< HEAD
         // Server settings
         $mail->isSMTP();  //Send using SMTP
         $mail->Host       = 'smtp.gmail.com'; //Set the SMTP server to send through
@@ -36,6 +37,15 @@ if(isset($_POST['email'])) {
         $mail->Username   = 'htaylail.hcis@gmail.com';  //SMTP username
         $mail->Password   = '@htaylailhcis@';  //SMTP password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;  //Enable implicit TLS encryption
+=======
+        //Server settings
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'htaylail.hcis@gmail.com';                     //SMTP username
+        $mail->Password   = 'password';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+>>>>>>> a069863fc81e87878a20eb5a857b7ad9ead21b70
         $mail ->SMTPSecure = "tls";
         $mail->Port       = 587;  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
