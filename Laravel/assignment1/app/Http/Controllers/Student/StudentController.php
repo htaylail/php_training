@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\Student;
 
 use App\Models\Major;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Exports\StudentsExport;
+
+use App\Imports\StudentsImport;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Contracts\Services\Student\StudentServiceInterface;
+
 
 /**
  * This is Student controller.
@@ -16,7 +22,7 @@ class StudentController extends Controller
   /**
    * student interface
    */
-  private $studentInterface;
+  private $studentService;
 
   /**
    * Create a new controller instance.
@@ -26,6 +32,7 @@ class StudentController extends Controller
   public function __construct(StudentServiceInterface $studentServiceInterface)
   {
     $this->studentInterface = $studentServiceInterface;
+
   }
 
 
@@ -101,4 +108,33 @@ class StudentController extends Controller
     $this->studentInterface->updatedStudentById($request, $id);
     return redirect()->route('student.index');
   }
+
+  /**
+     * @return View import view
+     */
+    public function importExportView()
+    {
+      //  return view('students.file-import');
+      return view('students.import');
+    }
+   
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function export() 
+    {
+        return Excel::download(new StudentsExport, 'students.csv');
+    }
+   
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function import() 
+    {
+        Excel::import(new StudentsImport,request()->file('file'));
+           
+        return redirect()->route('students')->with('success','Import data successfully');
+    }
+
+
 }

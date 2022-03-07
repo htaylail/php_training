@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<script>
+   function exportTasks(_this) {
+      let _url = $(_this).data('href');
+      window.location.href = _url;
+   }
+</script>
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -8,11 +14,11 @@
             </div>
         </div>
     </div>
-    
+
     <div class="pull-right">
         <a class="btn btn-success" href="{{ route('student.create') }}">New Student</a>
+        <a class="btn btn-primary" href="{{ route('students.import') }}">Import & Export View</a>
     </div>
-
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">

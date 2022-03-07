@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Services\Student;
 
 use App\Contracts\Dao\Student\StudentDaoInterface;
 use App\Contracts\Services\Student\StudentServiceInterface;
 use Illuminate\Http\Request;
+
 
 /**
  * Service class for student.
@@ -79,4 +79,5 @@ class StudentService implements StudentServiceInterface
   {
     return $this->studentDao->updatedStudentById($request, $id);
   }
+
 }

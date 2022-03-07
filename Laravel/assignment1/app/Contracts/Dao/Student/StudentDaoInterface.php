@@ -45,6 +45,4 @@ interface StudentDaoInterface
    * @return Object $post Post Object
    */
   public function updatedStudentById(Request $request, $id);
-
-  
 }

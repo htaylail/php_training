@@ -10,3 +10,8 @@ Route::get('/students/{student}', 'Student\StudentController@showStudentEdit')->
 Route::post('/students/{student}', 'Student\StudentController@updateStudent')->name('student.update');
 Route::delete('/students/{student}', 'Student\StudentController@deletePostById')->name('student.destroy');
 Route::post('/', 'Student\StudentController@showStudentList')->name('student.index');
+
+
+Route::get('/importfile', 'Student\StudentController@importExportView')->name('students.import');
+Route::get('/export', 'Student\StudentController@export')->name('export');
+Route::post('/import', 'Student\StudentController@import')->name('import');

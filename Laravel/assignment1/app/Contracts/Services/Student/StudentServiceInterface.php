@@ -47,5 +47,4 @@ interface StudentServiceInterface
    */
   public function updatedStudentById(Request $request, $id);
 
- 
 }
