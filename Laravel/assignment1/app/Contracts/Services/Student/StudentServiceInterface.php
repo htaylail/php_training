@@ -6,45 +6,71 @@ use Illuminate\Http\Request;
 
 
 /**
- * Interface for post service
+ * Interface for student service
  */
 interface StudentServiceInterface
 {
   /**
-   * To save post
+   * To save student
    * @param Request $request request with inputs
-   * @return Object $post saved post
+   * @return Object $student saved student
    */
   public function saveStudent(Request $request);
 
   /**
-   * To get post list
-   * @return array $postList Post list
+   * To get student list
+   * @return array $studentList student list
    */
   public function getStudentList();
 
   /**
-   * To delete post by id
-   * @param string $id post id
-   * @param string $deletedUserId deleted user id
+   * To delete student by id
+   * @param string $id student id
    * @return string $message message success or not
    */
   public function deleteStudentById($id);
 
   /**
-   * To get post by id
-   * @param string $id post id
-   * @return Object $post post object
+   * To get student by id
+   * @param string $id student id
+   * @return Object $student student object
    */
   public function getStudentById($id);
 
 
   /**
-   * To update post by id
+   * To update student by id
    * @param Request $request request with inputs
-   * @param string $id Post id
-   * @return Object $post Post Object
+   * @param string $id Student id
+   * @return Object $student Student Object
    */
   public function updatedStudentById(Request $request, $id);
+
+    /**
+   * To search student data 
+   * @param Request $request request with inputs
+   * @return Object $student student Object
+   */
+  public function searchStudent(Request $request);
+
+  /**
+   * To simportExportView student data 
+   * @return Object $student student Object
+   */
+  public function importExportView();
+
+  /**
+   * To search student data 
+   * @param Request $request request with inputs
+   * @return Object $student student Object
+   */
+  public function exportStudent();
+
+    /**
+   * To search student data 
+   * @param Request $request request with inputs
+   * @return Object $student student Object
+   */
+  public function importStudent();
 
 }

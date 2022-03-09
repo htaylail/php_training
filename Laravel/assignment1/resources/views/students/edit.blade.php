@@ -26,6 +26,11 @@
             <label for="name">Name</label>
             <input class="form-control" type="text" name="name" value="{{ $student->name }}" placeholder="Enter Name">
         </div>
+
+        <div class="mb-3">
+            <label for="grade">Grade</label>
+            <input class="form-control" type="number" name="grade" min="1" max="12" value="{{ $student->grade }}" placeholder="Format: betweeen 1 to 12">
+        </div>
        
         <div class="mb-3">
             <label for="major_id">Major</label>

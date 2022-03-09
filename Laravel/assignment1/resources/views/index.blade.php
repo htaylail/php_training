@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<script>
-   function exportTasks(_this) {
-      let _url = $(_this).data('href');
-      window.location.href = _url;
-   }
-</script>
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -18,6 +12,11 @@
     <div class="pull-right">
         <a class="btn btn-success" href="{{ route('student.create') }}">New Student</a>
         <a class="btn btn-primary" href="{{ route('students.import') }}">Import & Export View</a>
+    
+        <form style="float:right" type="get" action="{{ route('student.search') }}">
+            <input name="query" type="search" placeholder="Search ..">
+            <button class="btn btn-dark" type="submit">Search</button>
+        </form>
     </div>
 
     @if ($message = Session::get('success'))
@@ -26,20 +25,24 @@
         </div>
     @endif
 
+    
+
     <div style="margin-top: 10px;">
         <table class="table table-striped">
             <tr>
                 <th>No</th>
                 <th>Name</th>
-                <th>Major</th>
-                <th>Adtion</th>
+                <th>Grade</th>
+                <th>Major</th>               
+                <th>Operation</th>
             </tr>
 
             @foreach ($students as $student)
             <tr>
                 <td>{{ ++$no }}</td>
-                <th>{{ $student->name }}</th>
-                <td> {{ $student->major->name }} </td>
+                <td>{{ $student->name }}</td>
+                <td>{{ $student->grade }}</td>
+                <td>{{ $student->major->name }}</td>
                 <td>
                     <form method="POST" action=" {{ route('student.destroy', $student->id) }}">
                         <a onclick="return confirm('Are you sure to edit?')"; class="btn btn-primary" href="{{ route('student.edit',$student->id) }}"> Edit</a>

@@ -4,6 +4,10 @@ namespace App\Dao\Student;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use App\Exports\StudentsExport;
+use App\Imports\StudentsImport;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Contracts\Dao\Student\StudentDaoInterface;
 
 
@@ -21,6 +25,7 @@ class StudentDao implements StudentDaoInterface
   {
     $student = new Student();
     $student->name = $request['name'];
+    $student->grade = $request['grade'];
     $student->major_id = $request['major_id'];
     $student->save();
     return $student;
@@ -74,11 +79,48 @@ class StudentDao implements StudentDaoInterface
     $student = Student::find($id);
     $student->update([
       'name' => $request->name,
+      'grade' => $request->grade,
       'major_id' => $request->major_id,
       'updated_at' => now(),
     ]);
     $student->save();
     return $student;
   }
+
+  public function searchStudent(Request $request)
+  {
+      $search_text = $request->get('query');
+      $students = Student::where('name','LIKE','%' .$search_text. '%')
+      ->orWhere('grade', 'LIKE', '%' . $search_text . '%')
+      ->orWhere('major_id', 'LIKE', '%' . $search_text . '%')
+      ->with('major')->get();
+      return $students;
+  }
+
+
+  /**
+     * @return View import view
+     */
+    public function importExportView()
+    {
+      return view('students.import');
+    }
+
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function exportStudent() 
+    {
+      return Excel::download(new StudentsExport, 'students.csv');
+    }
+   
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function importStudent() 
+    {
+       return Excel::import(new StudentsImport,request()->file('file'));       
+    }
 
 }

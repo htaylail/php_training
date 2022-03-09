@@ -80,4 +80,39 @@ class StudentService implements StudentServiceInterface
     return $this->studentDao->updatedStudentById($request, $id);
   }
 
+
+  /**
+   * To search student
+   * @param Request $request request with inputs
+   * @return Object $student Student Object
+   */
+  public function searchStudent(Request $request)
+  {
+    return $this->studentDao->searchStudent($request);
+  }
+
+  /**
+   * @return View import view
+   */
+  public function importExportView()
+  {
+    return $this->studentDao->importExportView();     
+  }
+
+  /**
+   * To export student
+   */
+  public function exportStudent()
+  {
+    return $this->studentDao->exportStudent();
+  }
+  
+
+  /**
+  * To import student
+  */
+  public function importStudent()
+  {
+    return $this->studentDao->importStudent();
+  }
 }

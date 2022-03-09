@@ -11,7 +11,8 @@ use App\Imports\StudentsImport;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Contracts\Services\Student\StudentServiceInterface;
-
+use PHPUnit\Framework\MockObject\Builder\Stub;
+use Illuminate\Support\Facades\DB;
 
 /**
  * This is Student controller.
@@ -22,7 +23,7 @@ class StudentController extends Controller
   /**
    * student interface
    */
-  private $studentService;
+  private $studentInterface;
 
   /**
    * Create a new controller instance.
@@ -110,31 +111,58 @@ class StudentController extends Controller
   }
 
   /**
-     * @return View import view
-     */
-    public function importExportView()
-    {
-      //  return view('students.file-import');
-      return view('students.import');
-    }
-   
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function export() 
-    {
-        return Excel::download(new StudentsExport, 'students.csv');
-    }
-   
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function import() 
-    {
-        Excel::import(new StudentsImport,request()->file('file'));
-           
-        return redirect()->route('students')->with('success','Import data successfully');
-    }
+   * @return View import view
+   */
+  public function importExportView()
+  {
+    return view('students.import');
+  }
+  
 
+  public function exportStudent() 
+  {
+    $this->studentInterface->exportStudent();  
+    return redirect()->route('student.index')->with('success','Export data successfully');
+  }
+  
+  
+  public function importStudent() 
+  {
+    $this->studentInterface->importStudent();        
+    return redirect()->route('student.index')->with('success','Import data successfully');
+  }
+
+  public function searchStudent(Request $request)
+  {        
+    $students = $this->studentInterface->searchStudent($request);        
+    return view('index', compact('students'))->with('no');
+  }
 
 }
+
+
+
+  // /**
+  //    * @return View import view
+  //    */
+  //   public function importExportView()
+  //   {
+  //     return view('students.import');
+  //   }   
+
+  //   /**
+  //    * @return \Illuminate\Support\Collection
+  //    */
+  //   public function exportStudent() 
+  //   {
+  //       return Excel::download(new StudentsExport, 'students.csv');
+  //   }
+   
+  //   /**
+  //    * @return \Illuminate\Support\Collection
+  //    */
+  //   public function importStudent() 
+  //   {
+  //       Excel::import(new StudentsImport,request()->file('file'));       
+  //       return redirect()->route('student.index')->with('success','Import data successfully');
+  //   }

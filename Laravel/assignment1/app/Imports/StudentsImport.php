@@ -17,7 +17,8 @@ class StudentsImport implements ToModel,WithHeadingRow
     {
         return new Student([
             'name'     => $row['name'],
+            'grade'     => $row['grade'],
             'major_id'    => $row['major_id'], 
-        ]);
+        ]);       
     }
 }

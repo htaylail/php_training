@@ -26,6 +26,10 @@
             <label for="name">Name</label>
             <input class="form-control" type="text" name="name" value="" placeholder="Enter Name">
         </div>
+        <div class="mb-3">
+            <label for="grade">Grade</label>
+            <input class="form-control" type="number" name="grade" min="1" max="12" value="" placeholder="Format: betweeen 1 to 12">
+        </div>
 
         <div class="mb-3">
             <label for="major_id">Major</label>
@@ -38,8 +42,8 @@
     
 
         <div class="left">
-           <button type="submit">Submit</button>
-            <a href="#">Cancle</a>
+           <button class="btn btn-success" type="submit">Submit</button>
+            <a class="btn btn-warning" href="#">Cancle</a>
         </div>
 
     </form>
