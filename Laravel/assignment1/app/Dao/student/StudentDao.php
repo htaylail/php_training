@@ -8,6 +8,7 @@ use App\Exports\StudentsExport;
 use App\Imports\StudentsImport;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
 use App\Contracts\Dao\Student\StudentDaoInterface;
 
 
@@ -22,7 +23,7 @@ class StudentDao implements StudentDaoInterface
    * @return Object $student saved student
    */
   public function saveStudent(Request $request)
-  {
+  {   
     $student = new Student();
     $student->name = $request['name'];
     $student->grade = $request['grade'];

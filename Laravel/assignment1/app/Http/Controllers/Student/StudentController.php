@@ -8,11 +8,12 @@ use Illuminate\Http\Request;
 use App\Exports\StudentsExport;
 
 use App\Imports\StudentsImport;
-use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Contracts\Services\Student\StudentServiceInterface;
-use PHPUnit\Framework\MockObject\Builder\Stub;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
+use PHPUnit\Framework\MockObject\Builder\Stub;
+use App\Contracts\Services\Student\StudentServiceInterface;
 
 /**
  * This is Student controller.
@@ -45,7 +46,7 @@ class StudentController extends Controller
   public function showStudentList()
   {
     $students = $this->studentInterface->getStudentList();
-    return view('index', compact('students'))
+    return view('students.index', compact('students'))
       ->with('no');
   }
 
@@ -70,7 +71,13 @@ class StudentController extends Controller
   public function showStudentCreate()
   {
     $majors = Major::all();
+    $details = [
+      'title' => 'Hello , Welcom new Student',
+      'body' => 'This is for testing email using smtp'
+  ];
+    \Mail::to('htaylail.hcis@gmail.com')->send(new \App\Mail\MailController($details));
     return view('students.create', compact('majors'));
+
   }
 
 
@@ -94,6 +101,12 @@ class StudentController extends Controller
   public function deleteStudentById($id)
   {
     $this->studentInterface->deleteStudentById($id);
+    $details = [
+      'title' => 'Oh!, You delete account',
+      'body' => 'This is for testing email using smtp'
+  ];
+    \Mail::to('htaylail.hcis@gmail.com')->send(new \App\Mail\MailController($details));
+   
     return redirect('/');
   }
 
@@ -121,8 +134,7 @@ class StudentController extends Controller
 
   public function exportStudent() 
   {
-    $this->studentInterface->exportStudent();  
-    return redirect()->route('student.index')->with('success','Export data successfully');
+    return Excel::download(new StudentsExport, 'students.csv');
   }
   
   
@@ -135,34 +147,9 @@ class StudentController extends Controller
   public function searchStudent(Request $request)
   {        
     $students = $this->studentInterface->searchStudent($request);        
-    return view('index', compact('students'))->with('no');
+    return view('students.index', compact('students'))->with('no');
   }
 
 }
 
 
-
-  // /**
-  //    * @return View import view
-  //    */
-  //   public function importExportView()
-  //   {
-  //     return view('students.import');
-  //   }   
-
-  //   /**
-  //    * @return \Illuminate\Support\Collection
-  //    */
-  //   public function exportStudent() 
-  //   {
-  //       return Excel::download(new StudentsExport, 'students.csv');
-  //   }
-   
-  //   /**
-  //    * @return \Illuminate\Support\Collection
-  //    */
-  //   public function importStudent() 
-  //   {
-  //       Excel::import(new StudentsImport,request()->file('file'));       
-  //       return redirect()->route('student.index')->with('success','Import data successfully');
-  //   }

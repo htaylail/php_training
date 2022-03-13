@@ -9,3 +9,9 @@ Route::post('/', 'TaskController@index')->name('task.index');
 Route::post('/task', 'TaskController@store')->name('task.store');
 Route::delete('/task/{id}', 'TaskController@delete')->name('task.delete');
 
+
+
+Route::resource('/userData','UserDataController');
+Route::post('/userData/getUserData','UserDataController@getUserData');
+
+

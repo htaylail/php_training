@@ -10,6 +10,7 @@ use App\Http\Requests\StudentCreateApiRequest;
 use App\Contracts\Services\Student\StudentServiceInterface;
 use App\Http\Requests\StudentEditApiRequest;
 use App\Http\Resources\StudentResource;
+use SebastianBergmann\Environment\Console;
 
 class StudentApiController extends Controller
 {
@@ -20,6 +21,19 @@ class StudentApiController extends Controller
     $this->studentInterface = $studentServiceInterface;
   }
 
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        // $data['students'] = Student::orderBy('id','desc');
+        $data['students'] = Student::orderBy('id','desc')->paginate(5);
+        return view('ajaxs.list',$data);
+    }
+    
 
   /**
    * To show student list via api
@@ -65,8 +79,8 @@ class StudentApiController extends Controller
    */
   public function deleteStudentById($id)
   {
-    $msg = $this->studentInterface->deleteStudentById($id);
-    return response()->json($msg);
+    $student = $this->studentInterface->deleteStudentById($id);
+    return response()->json($student,['success' => true]);
   }
 
 
